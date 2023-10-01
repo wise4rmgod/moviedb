@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: Netflix Clone API
+  version: 1.0.0
+  description: RESTful API for managing movies in a Netflix-like application.
+
+servers:
+  - url: http://localhost:3000 # Update with your server URL
+
+paths:
+  /movies:
+    post:
+      summary: Create a new movie
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                video:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                genre:
+                  type: string
+                description:
+                  type: string
+                rating:
+                  type: number
+                release_year:
+                  type: integer
+              required:
+                - image
+                - video
+                - title
+                - genre
+      responses:
+        "201":
+          description: Movie created successfully
+        "500":
+          description: Internal Server Error
+
+    get:
+      summary: List all movies
+      responses:
+        "200":
+          description: List of movies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Movie"
+        "500":
+          description: Internal Server Error
+
+  /movies/search:
+    get:
+      summary: Search movies by title or genre
+      parameters:
+        - name: query
+          in: query
+          description: Search query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of matching movies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Movie"
+        "500":
+          description: Internal Server Error
+
+components:
+  schemas:
+    Movie:
+      type: object
+      properties:
+        id:
+          type: integer
+        image_url:
+          type: string
+        video_url:
+          type: string
+        title:
+          type: string
+        genre:
+          type: string
+        description:
+          type: string
+        rating:
+          type: number
+        release_year:
+          type: integer
