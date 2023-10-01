@@ -14,7 +14,7 @@ const db = mysql.createConnection({
   user: "aptible", // Change to your MySQL username
   password: "aYABNyPuk-FheBP63SUkCXcd-61f3ArS", // Change to your MySQL password
   database: "db",
-  ssl: { ciphers: "DHE-RSA-AES256-SHA" },
+  ssl: { rejectUnauthorized: false, ciphers: "DHE-RSA-AES256-SHA" },
   port: 26038,
 });
 
