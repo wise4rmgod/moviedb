@@ -9,7 +9,7 @@ const mysql = require("mysql2");
 //   ssl: { ciphers: "DHE-RSA-AES256-SHA" },
 // });
 
-const dbd = mysql.createConnection({
+const db = mysql.createConnection({
   host: "db-shared-us-west-1-115304.aptible.in", // Change to your MySQL host
   user: "aptible", // Change to your MySQL username
   password: "aYABNyPuk-FheBP63SUkCXcd-61f3ArS", // Change to your MySQL password
